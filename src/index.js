@@ -2,17 +2,26 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 // pages
-import Home from './pages/Home/Home'
-import Survey from './pages/Survey'
-import Results from './pages/Results'
-import Freelances from './pages/Freelances'
+import Home from './pages/Home/index'
+import Survey from './pages/Survey/index'
+import Results from './pages/Results/index'
+import Freelances from './pages/Freelances/index'
 // components
-import Header from './components/Header'
-import Error from './components/Error'
+import Header from './components/Header/index'
+import Error from './components/Error/index'
+// style
+import { createGlobalStyle } from 'styled-components'
  
+const GlobalStyle = createGlobalStyle`
+    div {
+        font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    }
+`
+
 ReactDOM.render(
     <React.StrictMode>
         <Router>
+        <GlobalStyle />
             <Header />
             <Switch>
             <Route exact path="/">
