@@ -2,7 +2,7 @@ import React from 'react'
 import DefaultPicture from '../../assets/profilPictures/profil.jpg'
 import Card from '../../components/Card/index'
 import styled from 'styled-components'
-import colors from '../../utils/style/colors'
+
 
 const CardsContainer = styled.div`
 display: grid;

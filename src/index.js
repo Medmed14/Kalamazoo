@@ -16,6 +16,10 @@ const GlobalStyle = createGlobalStyle`
     div {
         font-family: 'Trebuchet MS', Helvetica, sans-serif;
     }
+
+    body {
+        margin: 0;
+      }
 `
 
 ReactDOM.render(
@@ -27,7 +31,7 @@ ReactDOM.render(
             <Route exact path="/">
                 <Home />
             </Route>
-            <Route path="/survey">
+            <Route path="/survey/:questionNumber">
                 <Survey />
             </Route>
             <Route path="/results">
