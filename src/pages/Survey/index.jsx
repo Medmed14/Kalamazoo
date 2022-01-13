@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import colors from '../../utils/style/colors'
 import { Loader } from '../../utils/style/Atoms'
@@ -41,53 +40,45 @@ function Survey() {
   //pour le loader
   const [isDataLoading, setDataLoading] = useState(false)
   // pour error
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(false)
 
-//   useEffect(() => {
-//     setDataLoading(true)
-//     fetch(`http://localhost:8000/survey`)
-//     .then((response) => response.json())
-//     .then(({ surveyData }) => {
-//     setSurveyData(surveyData)
-//     setDataLoading(false)
-//     })
-// }, [])
 
-useEffect(() => {
-  async function fetchSurvey() {
-    setDataLoading(true)
-    try {
-      const response = await fetch(`http://localhost:8000/survey`)
-      const { surveyData } = await response.json()
-      setSurveyData(surveyData)
-     }
-    catch(err) {
-      setError(true)
+  useEffect(() => {
+    async function fetchSurvey() {
+      setDataLoading(true)
+      try {
+        const response = await fetch(`http://localhost:8000/survey`)
+        const { surveyData } = await response.json()
+        setSurveyData(surveyData)
+      }
+      catch (err) {
+        console.log(err)
+        setError(true)
+      }
+      finally {
+        setDataLoading(false)
+      }
     }
-    finally {
-      setDataLoading(false)
-    }
-  }
-  fetchSurvey()
-}, [] )
+    fetchSurvey()
+  }, [])
 
   return (
     <SurveyContainer>
-    <QuestionTitle>Question {questionNumber}</QuestionTitle>
-    {isDataLoading ? (
-      <Loader />
-    ) : (
-      <QuestionContent>{surveyData[questionNumber]}</QuestionContent>
-    )}
-    <LinkWrapper>
-      <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
-      {surveyData[questionNumberInt + 1] ? (
-        <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
+      <QuestionTitle>Question {questionNumber}</QuestionTitle>
+      {isDataLoading ? (
+        <Loader />
       ) : (
-        <Link to="/results">Résultats</Link>
+        <QuestionContent>{surveyData[questionNumber]}</QuestionContent>
       )}
-    </LinkWrapper>
-  </SurveyContainer>
+      <LinkWrapper>
+        <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
+        {surveyData[questionNumberInt + 1] ? (
+          <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
+        ) : (
+          <Link to="/results">Résultats</Link>
+        )}
+      </LinkWrapper>
+    </SurveyContainer>
   )
 }
 
