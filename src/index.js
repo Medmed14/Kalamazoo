@@ -8,6 +8,7 @@ import Results from './pages/Results/index'
 import Freelances from './pages/Freelances/index'
 // components
 import Header from './components/Header/index'
+import Footer from './components/Footer/index'
 import Error from './components/Error/index'
 // style
 import { createGlobalStyle } from 'styled-components'
@@ -44,6 +45,7 @@ ReactDOM.render(
                 <Error />
             </Route>
             </Switch>
+            <Footer />
         </Router>
     </React.StrictMode>,
 document.getElementById('root')
