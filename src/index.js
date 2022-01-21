@@ -1,52 +1,44 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-// pages
-import Home from './pages/Home/index'
-import Survey from './pages/Survey/index'
-import Results from './pages/Results/index'
-import Freelances from './pages/Freelances/index'
-// components
-import Header from './components/Header/index'
-import Footer from './components/Footer/index'
-import Error from './components/Error/index'
-// style
-import { createGlobalStyle } from 'styled-components'
- 
-const GlobalStyle = createGlobalStyle`
-    div {
-        font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    }
-
-    body {
-        margin: 0;
-      }
-`
+import Home from './pages/Home'
+import Survey from './pages/Survey'
+import Results from './pages/Results'
+import Freelances from './pages/Freelances'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Error from './components/Error'
+import GlobalStyle from './utils/style/GlobalStyle'
+import { ThemeProvider, SurveyProvider } from './utils/context'
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Router>
-        <GlobalStyle />
-            <Header />
-            <Switch>
+  <React.StrictMode>
+    <Router>
+      <ThemeProvider>
+        <SurveyProvider>
+          <GlobalStyle />
+          <Header />
+          <Switch>
             <Route exact path="/">
-                <Home />
+              <Home />
             </Route>
             <Route path="/survey/:questionNumber">
-                <Survey />
+              <Survey />
             </Route>
             <Route path="/results">
-                <Results />
+              <Results />
             </Route>
             <Route path="/freelances">
-                <Freelances />
+              <Freelances />
             </Route>
             <Route>
-                <Error />
+              <Error />
             </Route>
-            </Switch>
-            <Footer />
-        </Router>
-    </React.StrictMode>,
-document.getElementById('root')
+          </Switch>
+          <Footer />
+        </SurveyProvider>
+      </ThemeProvider>
+    </Router>
+  </React.StrictMode>,
+  document.getElementById('root')
 )
